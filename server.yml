@@ -20,7 +20,7 @@
     firewalld:
       zone: public
       service: nfs
-      permanent: yes
+      immediate: yes
       state: enabled
   - name: Creating NFS share
     file: 

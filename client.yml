@@ -19,11 +19,11 @@
   - name: update fstab and mount nfs share
     mount:
       name: /nfsmount
-      src: 192.168.122.112:/nfsshare
+      src: 192.168.122.111:/nfsshare
       fstype: nfs
-      opts: defaults,rw,_netdev
+      opts: defaults,rw
       dump: 0
-      passno: 2 
+      passno: 0 
       state: mounted
  
 
