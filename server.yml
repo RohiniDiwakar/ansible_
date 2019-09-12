@@ -34,7 +34,7 @@
       group=root
       mode=755
   - name: Exporting Share
-    command: exportfs
+    raw: exportfs -r
   
 
 
