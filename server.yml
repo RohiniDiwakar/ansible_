@@ -1,27 +1,31 @@
 ---
-- name: NFS
+- name: NFS Server
   become_user: root
   become: yes
-  hosts: localhost
+  hosts: nfs_server
   tasks:
   - name: Installing NFS
     yum:
       name: nfs-utils
       state: latest
-  - name: Enabling the service
+  - name: Enabling the NFS service
     service:
       name: nfs-server
       enabled: yes
-  - name: Starting the service
+  - name: Starting the NFS service
     service:
       name: nfs-server
       state: started
-  - name: Adding smtp in firewall
+  - name: Adding NFS in firewall
     firewalld:
       zone: public
       service: nfs
       permanent: yes
       state: enabled
+  - name: Creating NFS share
+    file: 
+      path: /nfsshare
+      state: directory
   - name: copy /etc/exports
     template:
       src=exports.j2
@@ -29,8 +33,8 @@
       owner=root
       group=root
       mode=755
-    tags: nfs_server,nfs_client
-
+  - name: Exporting Share
+    command: exportfs
   
 
 
